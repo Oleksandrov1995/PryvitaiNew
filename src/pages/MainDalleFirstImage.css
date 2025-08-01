@@ -1,0 +1,91 @@
+.main-dalle-first-image {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-dalle-first-image h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.main-dalle-first-image section {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.main-dalle-first-image section:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Глобальні стилі для всіх секцій */
+.main-dalle-first-image h2 {
+  color: #2c3e50;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Стилі для навігаційних кнопок */
+.navigation-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.nav-button.completed {
+  background-color: #007bff;
+  color: white;
+}
+
+.progress-indicator {
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  transition: width 0.3s ease;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .main-dalle-first-image {
+    padding: 1rem;
+  }
+  
+  .main-dalle-first-image h1 {
+    font-size: 1.5rem;
+  }
+}

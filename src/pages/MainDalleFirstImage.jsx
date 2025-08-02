@@ -8,7 +8,8 @@ import {
   CardMoodSection, 
   TraitsSection,
   GreetingSubjectSection,
-  HobbiesSection
+  HobbiesSection,
+  ImageGenerationSection
 } from "../components/sections";
 import { useFormData } from "../utils/formHandlers";
 
@@ -22,9 +23,10 @@ export const MainDalleFirstImage = () => {
   const greetingTextRef = useRef(null);
   const greetingSubjectRef = useRef(null);
   const traitsRef = useRef(null);
+  const imageGenerationRef = useRef(null);
 
   // Масив refs для зручності навігації
-  const sectionRefs = [styleRef, moodRef, photoRef, genderAgeRef, hobbiesRef, greetingSubjectRef, traitsRef, greetingTextRef];
+  const sectionRefs = [styleRef, moodRef, photoRef, genderAgeRef, hobbiesRef, greetingSubjectRef, traitsRef, greetingTextRef, imageGenerationRef];
 
   const { formData, updateField } = useFormData({
     cardStyle: '',
@@ -35,7 +37,9 @@ export const MainDalleFirstImage = () => {
     hobby: '',
     greetingText: '',
     greetingSubject: '',
-    trait: ''
+    trait: '',
+    generatedImagePrompt: '',
+    imageUrl: ''
   });
 
   const handleFieldChange = (field, value) => {
@@ -111,7 +115,15 @@ export const MainDalleFirstImage = () => {
       <GreetingTextSection 
         ref={greetingTextRef}
         onTextChange={handleFieldChange}
+        formData={formData}
         scrollToNextSection={createScrollToNextSection(7)}
+      />
+      
+      <ImageGenerationSection 
+        ref={imageGenerationRef}
+        onImageGenerated={handleFieldChange}
+        formData={formData}
+        scrollToNextSection={createScrollToNextSection(8)}
       />
 
     </div>

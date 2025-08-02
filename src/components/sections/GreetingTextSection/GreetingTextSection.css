@@ -67,6 +67,65 @@
   color: #f44336;
 }
 
+.generate-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+}
+
+.generate-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.generate-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.generated-greetings {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.generated-greetings h4 {
+  margin: 0 0 1rem 0;
+  color: #495057;
+  font-size: 0.9rem;
+}
+
+.greeting-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.greeting-option {
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 0.3rem;
+  padding: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.greeting-option:hover {
+  background-color: #e3f2fd;
+  border-color: #2196f3;
+  color: #1976d2;
+}
+
 .greeting-examples {
   background-color: #f8f9fa;
   border: 1px solid #e9ecef;

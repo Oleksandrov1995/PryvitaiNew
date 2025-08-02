@@ -1,8 +1,11 @@
 import React, { useState, forwardRef } from "react";
 import "./GreetingTextSection.css";
+import { greetingTextPrompts } from "../../../prompts/openai/greetingTextPrompts";
 
-const GreetingTextSection = forwardRef(({ onTextChange, scrollToNextSection }, ref) => {
+const GreetingTextSection = forwardRef(({ onTextChange, scrollToNextSection, formData }, ref) => {
   const [greetingText, setGreetingText] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedGreetings, setGeneratedGreetings] = useState([]);
   const maxLength = 500;
 
   const handleTextChange = (value) => {
@@ -22,6 +25,35 @@ const GreetingTextSection = forwardRef(({ onTextChange, scrollToNextSection }, r
 
   const handleExampleClick = (example) => {
     handleTextChange(example);
+  };
+
+  const generateGreetingIdeas = async () => {
+    setIsGenerating(true);
+    try {
+      console.log('FormData для генерації:', formData);
+      const prompt = greetingTextPrompts(formData);
+      console.log('Згенерований промпт:', prompt);
+      
+      const response = await fetch('http://localhost:5000/api/generate-greeting', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Помилка при генерації привітань');
+      }
+
+      const data = await response.json();
+      setGeneratedGreetings(data.greetings || []);
+    } catch (error) {
+      console.error('Помилка генерації:', error);
+      alert('Виникла помилка при генерації привітань. Спробуйте ще раз.');
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const getCharacterCountClass = () => {
@@ -54,7 +86,30 @@ const GreetingTextSection = forwardRef(({ onTextChange, scrollToNextSection }, r
           </span>
         </div>
 
-     <button>Згенерувати ідеї привітання </button>
+        <button 
+          onClick={generateGreetingIdeas}
+          disabled={isGenerating}
+          className="generate-button"
+        >
+          {isGenerating ? 'Генерую...' : 'Згенерувати ідеї привітання'}
+        </button>
+
+        {generatedGreetings.length > 0 && (
+          <div className="generated-greetings">
+            <h4>💡 Згенеровані ідеї привітань:</h4>
+            <div className="greeting-options">
+              {generatedGreetings.map((greeting, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleExampleClick(greeting)}
+                  className="greeting-option"
+                >
+                  {greeting}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="greeting-tips">
           <h4>💡 Поради для написання привітання:</h4>

@@ -30,7 +30,7 @@ const GreetingSubjectSection = forwardRef(({ onSubjectChange, scrollToNextSectio
 
   return (
     <section ref={ref} className="greeting-subject-section">
-      <h2>З якого приводу?</h2>
+      <h2>З чим вітаємо?</h2>
       
       <div className="greeting-subject-options">
         {optionsGreetingSubject.map((subject) => (

@@ -1,6 +1,7 @@
 import React, { useState, forwardRef } from "react";
 import "./ImageGenerationSection.css";
 import { dalleImagePrompt } from "../../../prompts/openai/dalleImagePrompt";
+import { API_URLS } from "../../../config/api";
 
 const ImageGenerationSection = forwardRef(({ onImageGenerated, scrollToNextSection, formData }, ref) => {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -41,7 +42,7 @@ const ImageGenerationSection = forwardRef(({ onImageGenerated, scrollToNextSecti
 
         const photoBase64 = await convertToBase64(formData.photo);
         
-        const uploadResponse = await fetch('http://localhost:5000/api/upload-photo', {
+        const uploadResponse = await fetch(API_URLS.UPLOAD_PHOTO, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -73,7 +74,7 @@ const ImageGenerationSection = forwardRef(({ onImageGenerated, scrollToNextSecti
       const prompt = dalleImagePrompt(formDataWithUrl);
       console.log('Промпт для DALL-E:', prompt);
       
-      const response = await fetch('http://localhost:5000/api/generate-image-promt', {
+      const response = await fetch(API_URLS.GENERATE_IMAGE_PROMPT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

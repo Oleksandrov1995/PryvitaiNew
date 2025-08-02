@@ -1,6 +1,7 @@
 import React, { useState, forwardRef } from "react";
 import "./GreetingTextSection.css";
 import { greetingTextPrompts } from "../../../prompts/openai/greetingTextPrompts";
+import { API_URLS } from "../../../config/api";
 
 const GreetingTextSection = forwardRef(({ onTextChange, scrollToNextSection, formData }, ref) => {
   const [greetingText, setGreetingText] = useState("");
@@ -34,7 +35,7 @@ const GreetingTextSection = forwardRef(({ onTextChange, scrollToNextSection, for
       const prompt = greetingTextPrompts(formData);
       console.log('Згенерований промпт:', prompt);
       
-      const response = await fetch('http://localhost:5000/api/generate-greeting', {
+      const response = await fetch(API_URLS.GENERATE_GREETING, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
